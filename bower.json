@@ -4,7 +4,7 @@
     "Olivier LE LAY"
   ],
   "description": "angular directive for chart.js",
-  "main": ["chart.directive.js", 'index.js'],
+  "main": ["chart.directive.js", "index.js"],
   "moduleType": [],
   "keywords": [
     "angular",
