@@ -6,8 +6,7 @@
   ],
   "description": "angular directive for chart.js",
   "main": [
-	"chart.directive.js",
-	"index.js"
+	"chart.directive.js"
   ],
   "moduleType": [],
   "keywords": [

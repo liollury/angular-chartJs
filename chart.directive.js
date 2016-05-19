@@ -1,8 +1,13 @@
+/**
+ * Created by olelay on 22/03/2016.
+ */
+
+
 (function(){
     'use strict';
     /* global Chart */
     angular
-        .module('chart.js')
+        .module('chart.js', [])
         .directive('chartJs', chartJs);
 
     /** @ngInject */
