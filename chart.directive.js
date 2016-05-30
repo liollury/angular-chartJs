@@ -18,11 +18,11 @@
                 chartDatasets: '=?',
                 chartLabels: '=?',
                 chartOptions: '=?',
-                chartType: '=?'
+                chartType: '=?',
+                chart: '=?'
             },
             link : function (scope, element){
                 var cvs;
-                var chart;
 
                 scope.$watch('chartDatasets', reload);
                 scope.$watch('chartOptions', reload);
@@ -32,15 +32,15 @@
                 function reload() {
                     if (cvs) {
                         cvs.remove();
-                        if (chart) {
+                        if (scope.chart) {
                             try {
-                                chart.destroy();
+                                scope.chart.destroy();
                             }catch(e) {
 
                             }
                         }
                         cvs = null;
-                        chart = null;
+                        scope.chart = null;
                     }
 
                     var labels = scope.chartLabels || [];
@@ -54,7 +54,7 @@
                         element.append(cvs);
                         var ctx = cvs[0].getContext('2d');
 
-                        chart = new Chart(ctx, {
+                        scope.chart = new Chart(ctx, {
                             type: type,
                             data: {
                                 labels: labels,
