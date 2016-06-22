@@ -23,6 +23,7 @@
             },
             link : function (scope, element){
                 var cvs;
+                var reloading = false;
 
                 scope.$watch('chartDatasets', reload);
                 scope.$watch('chartOptions', reload);
@@ -36,7 +37,7 @@
                             try {
                                 scope.chart.destroy();
                             }catch(e) {
-
+                                //console.log(e);
                             }
                         }
                         cvs = null;
@@ -48,20 +49,25 @@
                     var datasets = scope.chartDatasets || [];
                     var options = angular.extend({}, scope.chartOptions);
 
-                    if (datasets.length !== 0) {
+                    if (datasets.length !== 0 && !reloading) {
+                        reloading = true;
+                        element.empty();
+                        $timeout(function() {
+                            cvs = angular.element("<canvas></canvas>");
+                            element.append(cvs);
+                            var ctx = cvs[0].getContext('2d');
 
-                        cvs = angular.element("<canvas></canvas>");
-                        element.append(cvs);
-                        var ctx = cvs[0].getContext('2d');
-
-                        scope.chart = new Chart(ctx, {
-                            type: type,
-                            data: {
-                                labels: labels,
-                                datasets: datasets
-                            },
-                            options: options
+                            scope.chart = new Chart(ctx, {
+                                type: type,
+                                data: {
+                                    labels: labels,
+                                    datasets: datasets
+                                },
+                                options: options
+                            });
+                            reloading = false;
                         });
+                        
                     }
                 }
 
